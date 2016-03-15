@@ -1,13 +1,12 @@
 <?php
 
-namespace milano\tinymce;
+namespace wolfguard\tinymce;
 
+use wolfguard\tinymce\fm\FileManager;
 use Yii;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Url;
-use yii\web\JqueryAsset;
-use yii\web\View;
 use yii\widgets\InputWidget;
 
 class TinyMce extends InputWidget
@@ -127,7 +126,7 @@ class TinyMce extends InputWidget
             "insertdatetime media nonbreaking save table contextmenu directionality",
             "template paste textcolor"
         ),
-        'toolbar' => "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor",
+        'toolbar' => "code | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor",
         'toolbar_items_size' => 'small',
         'image_advtab' => true,
         'relative_urls' => false,
@@ -189,7 +188,20 @@ class TinyMce extends InputWidget
 
     public function run()
     {
+        $view = $this->getView();
+
+        $this->settings['plugins'][] = 'codemirror';
+        $codeMirrorUrl = $view->getAssetManager()->getBundle(TinyMceCodeMirrorAsset::className())->baseUrl;
+        $this->settings['codemirror'] = [
+            'path' => $codeMirrorUrl,
+            'indentOnInit' => true, 'config' => [
+                'tabSize' => 4, 'indentUnit' => 4
+            ]
+        ];
+
         $this->registerScripts();
+
+        TinyMcePluginsAsset::register($view);
 
         if (isset($this->model)) {
             echo Html::activeTextarea($this->model, $this->attribute, $this->options);
@@ -203,7 +215,7 @@ class TinyMce extends InputWidget
         $id = $this->options['id'];
         $view = $this->getView();
 
-        $languagesDir = $view->getAssetManager()->getBundle(\milano\tinymce\TinyMceLangAsset::className())->baseUrl;
+        $languagesDir = $view->getAssetManager()->getBundle(TinyMceLangAsset::className())->baseUrl;
         $languagesFile = "{$languagesDir}/langs/{$this->settings['language']}.js";
         $this->settings['language_url'] = $languagesFile;
 
@@ -228,7 +240,7 @@ class TinyMce extends InputWidget
                 TinyMceCompressorAction::scripUrl($this->compressorRoute, $opts),
                 [
                     'depends' => [
-                        'milano\tinymce\TinyMceAsset'
+                        'wolfguard\tinymce\TinyMceAsset'
                     ]
                 ]
             );

@@ -1,5 +1,5 @@
 <?php
-namespace milano\tinymce;
+namespace wolfguard\tinymce;
 
 use yii\web\Controller;
 

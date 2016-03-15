@@ -1,5 +1,5 @@
 <?php
-namespace milano\tinymce;
+namespace wolfguard\tinymce;
 
 class TinyMceAsset extends \yii\web\AssetBundle
 {

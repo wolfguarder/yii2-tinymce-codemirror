@@ -1,5 +1,5 @@
 <?php
-namespace milano\tinymce\fm;
+namespace wolfguard\tinymce\fm;
 
 use Yii;
 use yii\base\Exception;
@@ -8,7 +8,7 @@ use yii\helpers\Url;
 use yii\web\JsExpression;
 use yii\web\View;
 
-class MihaildevElFinder extends \milano\tinymce\fm\FileManager
+class MihaildevElFinder extends \wolfguard\tinymce\fm\FileManager
 {
 
     private $_id;

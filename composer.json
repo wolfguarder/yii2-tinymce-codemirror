@@ -1,29 +1,31 @@
 {
-  "name": "as-milano/yii2-tinymce",
-  "description": "Yii2 extension to use TinyMce with Compressor and FileManager",
+  "name": "wolfguard/yii2-tinymce-codemirror",
+  "description": "Yii2 extension to use TinyMce with Compressor, CodeMirror and FileManager",
   "type": "yii2-extension",
   "keywords": [
     "yii2",
     "extension",
     "tinymce",
-    "wysiwyg"
+    "wysiwyg",
+    "codemirror"
   ],
   "license": "BSD-3-Clause",
   "authors": [
     {
-      "name": "NecroMan",
-      "email": "nm666@bk.ru",
-      "homepage": "http://as-milano.ru/"
+      "name": "Wolfguard",
+      "email": "ivan.fedyaev@gmail.com",
+      "homepage": "https://github.com/wolfguarder/yii2-tinymce-codemirror"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "require": {
     "yiisoft/yii2": "~2.0",
-    "bower-asset/tinymce-dist": "dev-master"
+    "bower-asset/tinymce-dist": "*",
+    "bower-asset/codemirror": "*"
   },
   "autoload": {
     "psr-4": {
-      "milano\\tinymce\\": ""
+      "wolfguard\\tinymce\\": ""
     }
   }
 }

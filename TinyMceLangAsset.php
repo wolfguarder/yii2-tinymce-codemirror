@@ -1,11 +1,11 @@
 <?php
-namespace milano\tinymce;
+namespace wolfguard\tinymce;
 
 class TinyMceLangAsset extends \yii\web\AssetBundle
 {
 
-    public $sourcePath = '@vendor/as-milano/yii2-tinymce/assets';
+    public $sourcePath = '@vendor/wolfguard/yii2-tinymce-codemirror/assets';
     public $depends = [
-        'milano\tinymce\TinyMceAsset'
+        'wolfguard\tinymce\TinyMceAsset'
     ];
 }
