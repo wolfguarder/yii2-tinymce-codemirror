@@ -8,12 +8,13 @@ Provides:
 * compressor action;
 * integration with file managers like elFinder;
 * integration with spelling services like Yandex.
-
-Fork of [another extension](https://github.com/zxbodya/yii2-tinymce) with some additional features:
 * TinyMCE gone to npm package to always have the latest version;
 * Added integration with great [elFinder extension](https://github.com/MihailDev/yii2-elfinder);
 * (TODO) Icon to insert many images at once;
 * Few bugs resolved. It's all working now.
+
+Fork of [another extension](https://github.com/NecroMan/yii2-tinymce) with some additional features:
+* CodeMirror plugin integration for source code mode.
 
 Installation
 ------------
@@ -21,11 +22,11 @@ The preferred way to install this extension is through [composer](https://getcom
 
 Either run
 
-`php composer.phar require --prefer-dist wolfguard/yii2-tinymce "*"`
+`php composer.phar require --prefer-dist wolfguard/yii2-tinymce-codemirror "*"`
 
 or add
 
-`"wolfguard/yii2-tinymce": "*"`
+`"wolfguard/yii2-tinymce-codemirror": "*"`
 
 to the require section of your `composer.json` file.
 
@@ -194,4 +195,73 @@ Or you can build own spellcheking service using code provided by moxicode:
     'spellcheckerUrl'=>'http://speller.yandex.net/services/tinyspell',
     'options' => ['rows' => 6]
 ]) ?>
+```
+
+CodeMirror configuration
+-------------
+Additional configuration options
+
+You can modify the behaviour of the codemirror plugin, by adding a codemirror
+object to the TinyMCE configuration.
+
+**indentOnInit**: boolean (false) CodeMirror automatically indents code. With
+the indentOnInit option, you tell the Source Code editor to indent all code when
+the editor opens. This might be slow for large documents.
+
+**path**: string (codemirror) You might already have CodeMirror hosted elsewhere
+(outside TinyMCE). In that case, you can reuse that CodeMirror instance, by
+overriding the default path. For example:
+
+    path: 'http://www.mysite.com/tools/codemirror-4.8'
+
+**config**: Object CodeMirror configuration object, which is passed on to the
+CodeMirror instance. Check http://codemirror.net/doc/manual.html for available
+configuration options.
+
+**jsFiles**: Array Array of CodeMirror Javascript files you want to
+(additionally) load. For example:
+
+    jsFiles: [
+       'mode/clike/clike.js',
+       'mode/php/php.js'
+    ]
+
+The following Javascript files are always loaded: lib/codemirror.js,
+addon/edit/matchbrackets.js, mode/xml/xml.js, mode/javascript/javascript.js,
+mode/css/css.js, mode/htmlmixed/htmlmixed.js, addon/dialog/dialog.js,
+addon/search/searchcursor.js, addon/search/search.js,
+addon/selection/active-line.js.
+
+
+**cssFiles**: Array Array of CodeMirror CSS files you want to (additionally)
+load. For example:
+
+    cssFiles: [
+       'theme/neat.css',
+       'theme/elegant.css'
+    ]
+
+The following CSS files are always loaded: lib/codemirror.css,
+addon/dialog/dialog.css.
+
+Config example
+
+```js
+tinymce.init({
+  selector: '#html',
+  plugins: 'codemirror',
+  toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | code',
+  codemirror: {
+    indentOnInit: true, // Whether or not to indent code on init.
+    path: 'CodeMirror', // Path to CodeMirror distribution
+    config: {           // CodeMirror config object
+       mode: 'application/x-httpd-php',
+       lineNumbers: false
+    },
+    jsFiles: [          // Additional JS files to load
+       'mode/clike/clike.js',
+       'mode/php/php.js'
+    ]
+  }
+});
 ```
