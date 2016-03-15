@@ -1,13 +1,3 @@
-/**
- * plugin.js
- *
- * Copyright 2013 Web Power, www.webpower.nl
- * @author Arjan Haverkamp
- */
-
-/*jshint unused:false */
-/*global tinymce:true */
-
 tinymce.PluginManager.requireLangPack('codemirror');
 
 tinymce.PluginManager.add('codemirror', function(editor, url) {

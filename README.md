@@ -16,6 +16,8 @@ Provides:
 Fork of [another extension](https://github.com/NecroMan/yii2-tinymce) with some additional features:
 * CodeMirror plugin integration for source code mode.
 
+CodeMirror plugin was taken from Christiaan Baartse [repository](https://github.com/christiaan/tinymce-codemirror)
+
 Installation
 ------------
 The preferred way to install this extension is through [composer](https://getcomposer.org/).
